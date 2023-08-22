@@ -4,16 +4,16 @@
         <CurrentWeight :currentWeight="currentWeight" />
         <InputWeigth @add-weight="addWeight" />
         <WeigthChart :weights="weights" />
-        
     </div>
 </template>
 
 <script setup lang="ts">
-import{ computed, ref } from 'vue';
+import{ computed,ref} from 'vue';
 import type typeWeight from '@/types';
 import CurrentWeight from '../components/CurrentWeight.vue';
 import WeigthChart from '../components/WeigthChart.vue';
 import InputWeigth from '../components/InputWeigth.vue';
+
 const currentWeight = computed<{
     weight:number
 }>(() => {
@@ -26,6 +26,7 @@ const weights = ref<typeWeight[]>([]);
         date:new Date().getTime()
     })
  }
+
 
 </script>
 
