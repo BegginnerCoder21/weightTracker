@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="app">
         <h1>Weight Tracker</h1>
         <CurrentWeight :currentWeight="currentWeight" />
         <InputWeigth @add-weight="addWeight" />
@@ -31,5 +31,16 @@ const weights = ref<typeWeight[]>([]);
 </script>
 
 <style scoped>
+.app{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1{
+    margin-bottom: 30px;
+    font-weight: bold;
+}
 
 </style>

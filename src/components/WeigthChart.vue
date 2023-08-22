@@ -1,6 +1,6 @@
 <template>
     <div v-if="props.weights.length > 0">
-        <h2>Last 7 days</h2>
+        <h3>Last 7 days</h3>
         <div class="canvas-box">
             <canvas ref="weightChartE1"></canvas>
         </div>
@@ -13,7 +13,7 @@ import type typeWeight from '@/types';
 const weightChartE1 = ref(null);
 import Chart from 'chart.js/auto';
 import{ nextTick, ref, shallowRef, watch } from 'vue';
-const weightCart = shallowRef(null);
+const weightChart = shallowRef(null);
 import WeigthHistory from '@/components/WeigthHistory.vue';
 const props = defineProps<{
     weights:typeWeight[]
@@ -23,17 +23,17 @@ const props = defineProps<{
 watch(props.weights,(weightValue) => {
     const ws = [...weightValue];
 
-    if(weightCart.value){
-        weightCart.value.data.labels =  ws.sort((a,b) => a.date - b.date ).
+    if(weightChart.value){
+        weightChart.value.data.labels =  ws.sort((a,b) => a.date - b.date ).
                 map((w) => new Date(w.date).toLocaleDateString()).slice(-7);
 
-        weightCart.value.data.datasets[0].data =  ws.map((w) => w.weight ).slice(-7);
+        weightChart.value.data.datasets[0].data =  ws.map((w) => w.weight ).slice(-7);
 
-        weightCart.value.update();
+        weightChart.value.update();
         return;
     }
     nextTick(() => {
-        weightCart.value = new Chart(weightChartE1.value,{
+        weightChart.value = new Chart(weightChartE1.value.getContext('2d'),{
             type:'line',
             data:{
                 labels:ws.sort((a,b) => b.date - a.date ).
@@ -49,7 +49,7 @@ watch(props.weights,(weightValue) => {
             },
             options:{
                 responsive:false,
-                maintAspectRatio:false
+                maintainAspectRatio:false
             }
         })
     })
@@ -60,4 +60,18 @@ watch(props.weights,(weightValue) => {
 
 <style scoped>
 
+h3{
+    color: gray;
+}
+
+.canvas-box {
+	width: 100%;
+	max-width: 720px;
+	background-color: white;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	margin-bottom: 2rem;
+    margin-top: 10px;
+}
 </style>
