@@ -17,10 +17,10 @@ import Home from '@/views/Home.vue';
   padding: 0;
   box-sizing: border-box;
   font-family: 'montserrat','sans-serif';
+  background-color: #eee;
 }
 
 main{
   padding: 1.5rem;
-  background-color: #eee;
 }
 </style>
